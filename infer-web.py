@@ -32,6 +32,7 @@ import threading
 import shutil
 import logging
 
+from upload import upload_file
 
 logging.getLogger("numba").setLevel(logging.WARNING)
 
@@ -804,8 +805,10 @@ with gr.Blocks(title="RVC WebUI") as app:
                             )
                             input_audio0 = gr.Textbox(
                                 label=i18n("输入待处理音频文件路径(默认是正确格式示例)"),
-                                placeholder="C:\\Users\\Desktop\\audio_example.wav",
+                                placeholder="path/to/file",
                             )
+                            upload_button = gr.UploadButton("Hier klicken zum hochladen")
+                            upload_button.upload(upload_file, upload_button, [input_audio0])
                             file_index1 = gr.Textbox(
                                 label=i18n("特征检索库文件路径,为空则使用下拉的选择结果"),
                                 placeholder="C:\\Users\\Desktop\\model_example.index",
